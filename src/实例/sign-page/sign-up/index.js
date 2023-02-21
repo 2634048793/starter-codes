@@ -63,4 +63,21 @@
             invite.classList.add("on-error");
         }
     });
+    var sendCode = document.getElementById("send-code");
+    var countDown = document.getElementById("count-down");
+    sendCode.addEventListener("click", function () {
+        sendCode.style.display = "none";
+        countDown.style.display = "block";
+        var count = 59;
+        countDown.innerText = count + "s";
+        var timer = setInterval(function () {
+            countDown.innerText = count + "s";
+            count--;
+            if (count <= 0) {
+                clearInterval(timer);
+                sendCode.style.display = "block";
+                countDown.style.display = "none";
+            }
+        }, 1000);
+    });
 })();

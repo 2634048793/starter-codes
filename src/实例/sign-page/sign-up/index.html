@@ -74,7 +74,7 @@
         box-sizing: border-box;
         box-shadow: 0px 61px 50px -22px rgba(0, 0, 0, 0.08);
         margin: 150px auto;
-        border-radius:12px;
+        border-radius: 12px;
       }
       .title {
         font-size: 28px;
@@ -91,6 +91,15 @@
       .require {
         color: #ff7600;
       }
+      .send-code {
+        margin-left: -96px;
+        color: #2d82e3;
+        cursor: pointer;
+      }
+      .count-down {
+        margin-left: -40px;
+        color: darkgrey;
+      }
       .h-8 {
         height: 8px;
       }
@@ -100,20 +109,18 @@
       .h-36 {
         height: 36px;
       }
+      .d-flex {
+        display: flex;
+      }
+      .align-items-center {
+        align-items: center;
+      }
       .flex-between {
         display: flex;
         justify-content: space-between;
       }
       .text-center {
         text-align: center;
-      }
-      .rela {
-        display: -webkit-flex;
-        display: flex;
-      }
-      .rela.hold{
-        width: 25px;
-        background-color: pink;
       }
     </style>
   </head>
@@ -141,13 +148,14 @@
         <span class="font">Verification code</span>
       </div>
       <div class="h-8"></div>
-      <div id="rela">
+      <div class="d-flex align-items-center">
         <input
           id="verification"
           type="password"
           placeholder="Enter the codes sent to your email"
         />
-        <div id="hold"><button>hold</button></div>
+        <div id="send-code" class="send-code">Send Code</div>
+        <div id="count-down" class="count-down" style="display: none">59s</div>
       </div>
       <div class="h-36"></div>
       <div>

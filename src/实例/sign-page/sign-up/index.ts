@@ -70,4 +70,22 @@
       invite.classList.add("on-error");
     }
   });
+
+  let sendCode = document.getElementById("send-code") as HTMLDivElement;
+  let countDown = document.getElementById("count-down") as HTMLDivElement;
+  sendCode.addEventListener("click", () => {
+    sendCode.style.display = "none";
+    countDown.style.display = "block";
+    let count = 59;
+    countDown.innerText=count+"s"
+    const timer = setInterval(function () {
+      countDown.innerText=count+"s"
+      count--;
+      if (count <= 0) {
+        clearInterval(timer);
+        sendCode.style.display = "block";
+        countDown.style.display = "none";
+      }
+    }, 1000);
+  });
 })();
