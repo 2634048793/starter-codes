@@ -9,6 +9,30 @@
       body {
         background-color: #f5f5f5;
       }
+      a {
+        text-decoration: none;
+        color: #2D82E3;
+      }
+      input {
+        width: 100%;
+        height: 42px;
+        background-color: #ffffff;
+        border: 1px solid #dbe4eb;
+        border-radius: 6px;
+        padding: 0 12px;
+        box-sizing: border-box;
+        transition: 0.3s all;
+      }
+      input:focus {
+        outline: none;
+      }
+      input.on-focus:not(.on-error){
+        border-color: #11db86;
+        box-shadow: 0 0 0 2px rgb(17 219 134 / 30%);
+      }
+      input.on-error{
+        border-color: red;
+      }
       button {
         color: #ffffff;
         font-size: 16px;
@@ -42,45 +66,26 @@
 
         opacity: 0;
       }
-
       .pop-message.is-visible {
         top: 28px;
         opacity: 1;
       }
-      input {
-        width: 100%;
-        height: 42px;
-        background-color: #ffffff;
-        border: 1px solid #dbe4eb;
-        border-radius: 6px;
-        padding: 0 12px;
-        box-sizing: border-box;
-        transition: 0.3s all;
-      }
-      input:focus {
-        outline: none;
-      }
-      input.on-focus:not(.on-error) {
-        border-color: #11db86;
-        box-shadow: 0 0 0 2px rgb(17 219 134 / 30%);
-      }
-      input.on-error {
-        border-color: red;
-      }
       .container {
         width: 460px;
-        padding: 32px 28px 48px 28px;
-        background-color: #ffffff;
+        padding: 32px 28px 40px 28px;
         box-sizing: border-box;
         box-shadow: 0px 61px 50px -22px rgba(0, 0, 0, 0.08);
-        margin: 150px auto;
+        background-color: #ffffff;
+        margin: 144px auto;
+        border-radius:12px;
       }
       .title {
         font-size: 28px;
         font-weight: 600;
-        line-height: 42px;
         color: #00102b;
+        line-height: 42px;
       }
+
       .label {
         font-weight: 400;
         font-size: 16px;
@@ -90,14 +95,21 @@
       .require {
         color: #ff7600;
       }
+
       .h-8 {
         height: 8px;
       }
-      .h-27 {
-        height: 27px;
+      .h-20 {
+        height: 20px;
+      }
+      .h-28 {
+        height: 28px;
       }
       .h-36 {
         height: 36px;
+      }
+      .h-64 {
+        height: 64px;
       }
       .flex-between {
         display: flex;
@@ -110,63 +122,37 @@
   </head>
   <body>
     <div id="pop-message" class="pop-message">
-      Please ensure the information is correct
-    </div>
+      Please ensure the information is correct</div>
     <div class="container">
       <div class="title">
-        Welcome to iPeakoin<br />
-        Let’s create your account.
+        Hello <br />
+        Sign in to your account.
       </div>
-      <div class="h-27"></div>
-      <div class="label">
-        <span class="require">*</span>
-        <span class="font">Email</span>
+      <div class="h-28"></div>
+      <div>
+        <span class="label">
+          <span class="require">*</span>
+          <span class="font">Email</span>
+        </span>
       </div>
       <div class="h-8"></div>
-      <div>
-        <input id="email" type="text" placeholder="Your email address" />
-      </div>
+      <div><input id="email" type="text" placeholder="Your email address" /></div>
+      <div></div>
       <div class="h-36"></div>
-      <div>
-        <span class="require">*</span>
-        <span class="font">Verification code</span>
-      </div>
-      <div class="h-8"></div>
-      <div>
-        <input
-          id="verification"
-          type="text"
-          placeholder="Enter the codes sent to your email"
-        />
-      </div>
-      <div class="h-36"></div>
-      <div>
-        <span class="require">*</span>
-        <span class="font">Password</span>
+      <div class="flex-between">
+        <span class="label">
+          <span class="require">*</span>
+          <span>Password</span>
+        </span>
+        <a href="#">Forgot your password?</a>
       </div>
       <div class="h-8"></div>
       <div><input id="password" type="text" placeholder="Your password" /></div>
-      <div class="h-36"></div>
-      <div>
-        <span class="require">*</span>
-        <span class="font">confirm password</span>
-      </div>
-      <div>
-        <input id="confirm" type="text" placeholder="Confirm your password" />
-      </div>
-      <div class="h-36"></div>
-      <div calss>invite code</div>
-      <div class="h-8"></div>
-      <div>
-        <input
-          id="invite"
-          type="text"
-          placeholder="Past the invite code here"
-        />
-      </div>
-      <div class="h-36"></div>
-      <div id="submit"><button>Create Account</button></div>
+      <div class="h-64"></div>
+      <div id="submit"><button>Continue</button></div>
+      <div class="h-20"></div>
+      <div class="text-center"><a href="#">Sign up</a></div>
     </div>
-    <script src="./注册页面.js"></script>
+    <script src="./登录界面.js"></script>
   </body>
 </html>

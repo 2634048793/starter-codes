@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .flex-container {
+        display: -webkit-flex;
+        display: flex;
+        width: 400px;
+        height: 250px;
+        background-color: lightgrey;
+      }
+
+      .flex-left {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        justify-content: flex-start;
+      }
+      .flex-right {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+        justify-content: flex-end;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flex-container">
+      <div class="flex-item"><input id="text" type="password" /></div>
+      <div style="margin: 0 -20px;" class="flex-item"><button id="submit">m</button></div>
+    </div>
+    <div style="background-color: black; width: 100px; height: 30px"></div>
+    <div
+      style="background-color: red; margin: -20px ; width: 100px; height: 30px"
+    ></div>
+    <script src="./tu.js"></script>
+  </body>
+</html>

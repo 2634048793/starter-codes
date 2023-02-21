@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <style>
-      body {
+            body {
         background-color: #f5f5f5;
       }
       a {
@@ -71,20 +71,22 @@
         opacity: 1;
       }
       .container {
-        width: 460px;
-        padding: 32px 28px 40px 28px;
-        box-sizing: border-box;
+        height: 472px;
+        width: 390px;
+        padding: 34px 26px 50px 26px;
+        box-sizing:border-box;
         box-shadow: 0px 61px 50px -22px rgba(0, 0, 0, 0.08);
         background-color: #ffffff;
         margin: 144px auto;
+        border-radius:12px;
       }
+
       .title {
         font-size: 28px;
         font-weight: 600;
         color: #00102b;
         line-height: 42px;
       }
-
       .label {
         font-weight: 400;
         font-size: 16px;
@@ -94,21 +96,10 @@
       .require {
         color: #ff7600;
       }
-
-      .h-8 {
-        height: 8px;
-      }
-      .h-20 {
-        height: 20px;
-      }
-      .h-28 {
-        height: 28px;
-      }
-      .h-36 {
-        height: 36px;
-      }
-      .h-64 {
-        height: 64px;
+      .font{
+        color: (52,74,90);
+        font-size: 18px;
+        line-height: 22px;
       }
       .flex-between {
         display: flex;
@@ -123,35 +114,29 @@
     <div id="pop-message" class="pop-message">
       Please ensure the information is correct</div>
     <div class="container">
-      <div class="title">
-        Hello <br />
-        Sign in to your account.
+      <div class="title">Forget password?</div>
+      <div style="height: 34px"></div>
+      <div class="label">
+        <span class="require">*</span>
+        <span class="font">Email</span>
       </div>
-      <div class="h-28"></div>
+      <div style="height: 14px"></div>
+      <div><input id="email" type="text" /></div>
+      <div style="height: 34px"></div>
+      <div class="label">
+        <span class="require">*</span>
+        <span class="font">Verification Code</span>
+        <span><a href="#"></a></span>
+      </div>
+      <div style="height: 14px"></div>
+      <div><input id="code" type="text" /></div>
+      <div style="height: 50px"></div>
       <div>
-        <span class="label">
-          <span class="require">*</span>
-          <span class="font">Email</span>
-        </span>
+        <div id="submit"><button>Continue</button></div>
       </div>
-      <div class="h-8"></div>
-      <div><input id="email" type="text" placeholder="Your email address" /></div>
-      <div></div>
-      <div class="h-36"></div>
-      <div class="flex-between">
-        <span class="label">
-          <span class="require">*</span>
-          <span>Password</span>
-        </span>
-        <a href="#">Forgot your password?</a>
-      </div>
-      <div class="h-8"></div>
-      <div><input id="password" type="text" placeholder="Your password" /></div>
-      <div class="h-64"></div>
-      <div id="submit"><button>Continue</button></div>
-      <div class="h-20"></div>
-      <div class="text-center"><a href="#">Sign up</a></div>
+      <div style="height: 42px"></div>
+      <div><a href="#">Reatyrn to sign in</a></div>
     </div>
-    <script src="./登录界面.js"></script>
+    <script src="./忘记密码.js"></script>
   </body>
 </html>
