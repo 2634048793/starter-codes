@@ -45,4 +45,15 @@
       password.classList.add("on-error");
     }
   });
+
+  const eyes=document.getElementById("eyes") as HTMLSpanElement
+
+  eyes.addEventListener("click",()=>{
+    if(password.type==="password"){
+      password.type="text"
+    }
+    else{
+      password.type="password"
+    }
+  })
 })();
