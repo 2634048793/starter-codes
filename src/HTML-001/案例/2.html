@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form accept="xxx.php" method="get">
+        <!-- text文本框 用户可以里面输入任何文字 -->
+        <!-- label标签用于绑定一个表单元素，当点击标签内标记的文本时，浏览器就会自动将光标移动到相对应的表单元素上 -->
+        <label for="text">用户名</label><input type="text" name="username" value="请输入用户名" maxlength="5" id="text"> <br>
+        <!-- 密码框 用户看不见里面输入的数字 -->
+        密码<input type="password" name="psd"><br>
+        性别<input type="radio" name="sex" value="男" checked="checked" id="nan"><label for="nan">男 <input type="radio"
+                name="sex" value="女" id="nv"><label for="nv">女<br>
+                爱好 吃<input type="checkbox" name="hobby" value="吃" checked="checked"> 吃<input type="checkbox"
+                    name="hobby" value="吃">吃 <input type="checkbox" name="hobby
+        "><br>
+                <!-- 点击提交按钮可以直接把表单域里的元素提交给服务器后台 -->
+                <input type="submit" value="免费注册">
+                <!-- 点击重新设置按钮可以直接把表单域里的元素设置为最开始状态 -->
+                <input type="reset" value="重新设置">
+                <!-- 普通按钮的设置 通常搭配js来使用 -->
+                <input type="button" value="获取短信验证码"><br>
+                <!-- 上传文件 -->
+                <input type="file" value="上传头像">
+                今日反馈：
+                <textarea cols="50" rows="5">
+            <!-- cols是用来限制有多少个字符 rows是用来限制有多少行实际开发不会使用 -->
+            <!-- textarea是用来做反馈留言的 -->
+        </textarea>
+    </form>
+    <!-- select表示下拉表单可以节约空间 -->
+    籍贯：
+    <select>
+        <option>山东</option>
+        <option>杭州</option>
+        <option>上海</option>
+        <option>火星</option>
+        <!-- <option selected="selected">杭州</option>表示开始画面初始地为杭州 -->
+        <option selected="selected">杭州</option>
+    </select>
+</body>
+
+</html>

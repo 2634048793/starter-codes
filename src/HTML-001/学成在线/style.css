@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+.w{
+    width: 1200px;
+    margin: auto;
+}
+.header{
+    height: 42px;
+
+}
+.logo{
+    height: 130;
+    background-color: black;
+    margin: 30px;
+}
