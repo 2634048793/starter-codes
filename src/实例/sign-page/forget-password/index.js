@@ -31,8 +31,7 @@
     var submit = document.getElementById("submit");
     submit.addEventListener("click", function () {
         if (email.value === "" || code.value === "") {
-            console.log(123);
-            message.classList.add("is-visble");
+            message.classList.add("is-visible");
             setTimeout(function () { return message.classList.remove("is-visible"); }, 2 * 1000);
         }
         if (email.value === "") {
