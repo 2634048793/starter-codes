@@ -61,7 +61,7 @@
 
     return food;
   }
-
+  // 重置地图
   function renderMap() {
     for (let y = 0; y < 20; y++) {
       for (let x = 0; x < 20; x++) {
@@ -69,11 +69,13 @@
       }
     }
   }
+  // 重置食物
   function renderFood() {
     const fx = food[0];
     const fy = food[1];
     map[fy][fx].style.backgroundColor = "pink";
   }
+  // 重置蛇身体
   function renderSnake() {
     for (let i = 0; i < sanke.length; i++) {
       const x = sanke[i][0];
@@ -131,20 +133,20 @@
   //   }
   // }
 
-  function enter(){
-    const tx=sanke[0][0]
-    const ty=sanke[0][1]
-    if(tx===20){
-      sanke[0][0]=0;
+  function enter() {
+    const tx = sanke[0][0];
+    const ty = sanke[0][1];
+    if (tx === 20) {
+      sanke[0][0] = 0;
     }
-    if(tx===-1){
-      sanke[0][0]=19;
+    if (tx === -1) {
+      sanke[0][0] = 19;
     }
-    if(ty===20){
-      sanke[0][1]=0;
+    if (ty === 20) {
+      sanke[0][1] = 0;
     }
-    if(ty===-1){
-      sanke[0][1]=19;
+    if (ty === -1) {
+      sanke[0][1] = 19;
     }
   }
   // 使蛇不能回头

@@ -57,6 +57,7 @@
         }
         return food;
     }
+    // 重置地图
     function renderMap() {
         for (var y = 0; y < 20; y++) {
             for (var x = 0; x < 20; x++) {
@@ -64,11 +65,13 @@
             }
         }
     }
+    // 重置食物
     function renderFood() {
         var fx = food[0];
         var fy = food[1];
         map[fy][fx].style.backgroundColor = "pink";
     }
+    // 重置蛇身体
     function renderSnake() {
         for (var i = 0; i < sanke.length; i++) {
             var x = sanke[i][0];
