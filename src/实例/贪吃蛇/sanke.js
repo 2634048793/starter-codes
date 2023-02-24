@@ -1,4 +1,5 @@
 (function () {
+    // 生成地图（20*20个盒子）
     function createMap() {
         var container = document.getElementById("container");
         for (var a = 0; a < 400; a++) {
@@ -20,6 +21,7 @@
         }
         return map;
     }
+    // 生成蛇的身体
     function createSnake() {
         var sanke = [
             [4, 0],
@@ -30,6 +32,7 @@
         ];
         return sanke;
     }
+    // 生成食物
     function createFood() {
         var randomFood = Math.floor(Math.random() * (400 - sanke.length));
         var food = [0, 0];
@@ -78,6 +81,7 @@
             }
         }
     }
+    // 监听蛇的移动
     function moveSnake() {
         var last = sanke.pop();
         var first = sanke[0];
@@ -85,6 +89,7 @@
         last[1] = first[1] + direction[1];
         sanke.unshift(last);
     }
+    // 迟到食物
     function eatFoodWhenCounter() {
         var first = sanke[0];
         var last = sanke[sanke.length - 1];
@@ -94,6 +99,7 @@
             food = createFood();
         }
     }
+    // 吃到蛇身
     function dieWhenEatSelf() {
         var xt = sanke[0][0];
         var yt = sanke[0][1];
@@ -105,15 +111,35 @@
             }
         }
     }
-    function dieWhenOut() {
-        var first = sanke[0];
-        if (first[0] === 20 ||
-            first[0] === -1 ||
-            first[1] === 20 ||
-            first[1] === -1) {
-            gameOver();
+    // 撞到墙
+    // function dieWhenOut() {
+    //   const first = sanke[0];
+    //   if (
+    //     first[0] === 20 ||
+    //     first[0] === -1 ||
+    //     first[1] === 20 ||
+    //     first[1] === -1
+    //   ) {
+    //     gameOver();
+    //   }
+    // }
+    function enter() {
+        var tx = sanke[0][0];
+        var ty = sanke[0][1];
+        if (tx === 20) {
+            sanke[0][0] = 0;
+        }
+        if (tx === -1) {
+            sanke[0][0] = 19;
+        }
+        if (ty === 20) {
+            sanke[0][1] = 0;
+        }
+        if (ty === -1) {
+            sanke[0][1] = 19;
         }
     }
+    // 使蛇不能回头
     function control() {
         window.addEventListener("keydown", function (event) {
             if (event.code === "ArrowRight" && direction[0] !== -1) {
@@ -134,6 +160,7 @@
             }
         });
     }
+    // 游戏结束刷新页面
     function gameOver() {
         alert("Game Over");
         window.location.reload();
@@ -150,7 +177,8 @@
         moveSnake();
         eatFoodWhenCounter();
         dieWhenEatSelf();
-        dieWhenOut();
+        // dieWhenOut();
+        enter();
         renderMap();
         renderFood();
         renderSnake();

@@ -1,4 +1,5 @@
 (function () {
+  // 生成地图（20*20个盒子）
   function createMap() {
     const container = document.getElementById("container") as HTMLDivElement;
     for (let a = 0; a < 400; a++) {
@@ -22,6 +23,7 @@
 
     return map;
   }
+  // 生成蛇的身体
   function createSnake() {
     const sanke: [x: number, y: number][] = [
       [4, 0],
@@ -32,6 +34,7 @@
     ];
     return sanke;
   }
+  // 生成食物
   function createFood() {
     let randomFood = Math.floor(Math.random() * (400 - sanke.length));
     const food: [x: number, y: number] = [0, 0];
@@ -58,6 +61,7 @@
 
     return food;
   }
+
   function renderMap() {
     for (let y = 0; y < 20; y++) {
       for (let x = 0; x < 20; x++) {
@@ -82,6 +86,7 @@
       }
     }
   }
+  // 监听蛇的移动
   function moveSnake() {
     const last = sanke.pop() as [x: number, y: number];
     const first = sanke[0];
@@ -91,6 +96,7 @@
 
     sanke.unshift(last);
   }
+  // 迟到食物
   function eatFoodWhenCounter() {
     const first = sanke[0];
     const last = sanke[sanke.length - 1];
@@ -100,6 +106,7 @@
       food = createFood();
     }
   }
+  // 吃到蛇身
   function dieWhenEatSelf() {
     const xt = sanke[0][0];
     const yt = sanke[0][1];
@@ -111,17 +118,36 @@
       }
     }
   }
-  function dieWhenOut() {
-    const first = sanke[0];
-    if (
-      first[0] === 20 ||
-      first[0] === -1 ||
-      first[1] === 20 ||
-      first[1] === -1
-    ) {
-      gameOver();
+  // 撞到墙
+  // function dieWhenOut() {
+  //   const first = sanke[0];
+  //   if (
+  //     first[0] === 20 ||
+  //     first[0] === -1 ||
+  //     first[1] === 20 ||
+  //     first[1] === -1
+  //   ) {
+  //     gameOver();
+  //   }
+  // }
+
+  function enter(){
+    const tx=sanke[0][0]
+    const ty=sanke[0][1]
+    if(tx===20){
+      sanke[0][0]=0;
+    }
+    if(tx===-1){
+      sanke[0][0]=19;
+    }
+    if(ty===20){
+      sanke[0][1]=0;
+    }
+    if(ty===-1){
+      sanke[0][1]=19;
     }
   }
+  // 使蛇不能回头
   function control() {
     window.addEventListener("keydown", (event) => {
       if (event.code === "ArrowRight" && direction[0] !== -1) {
@@ -142,6 +168,7 @@
       }
     });
   }
+  // 游戏结束刷新页面
   function gameOver() {
     alert("Game Over");
     window.location.reload();
@@ -163,7 +190,8 @@
 
     eatFoodWhenCounter();
     dieWhenEatSelf();
-    dieWhenOut();
+    // dieWhenOut();
+    enter();
 
     renderMap();
     renderFood();
