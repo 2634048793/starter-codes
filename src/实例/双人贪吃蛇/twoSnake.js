@@ -1,4 +1,14 @@
 (function () {
+    function isSnakeThere(position, snake) {
+        var x = position[0], y = position[1];
+        for (var i = 0; i < snake.body.length; i++) {
+            var _a = snake.body[i], sx = _a[0], sy = _a[1];
+            if (sx === x && sy === y) {
+                return true;
+            }
+        }
+        return false;
+    }
     /** 生成地图（20*20个盒子） */
     function createMap() {
         var container = document.getElementById("container");
@@ -24,116 +34,65 @@
         }
         return map;
     }
-    /** 生成蛇的身体 */
-    function createSnake() {
-        var sanke = [
-            [15, 19],
-            [16, 19],
-            [17, 19],
-            [18, 19],
-            [19, 19],
-        ];
-        return sanke;
-    }
-    function createSnake2() {
-        var sanke = [
-            [4, 0],
-            [3, 0],
-            [2, 0],
-            [1, 0],
-            [0, 0],
-        ];
-        return sanke;
+    /** 生成多条蛇 */
+    function createSnakes(num) {
+        var snake1 = {
+            body: [
+                [4, 0],
+                [3, 0],
+                [2, 0],
+                [1, 0],
+                [0, 0],
+            ],
+            controller: {
+                up: "KeyW",
+                down: "KeyS",
+                right: "KeyD",
+                left: "KeyA"
+            },
+            direction: [1, 0],
+            headColor: "green",
+            bodyColor: "black"
+        };
+        var snake2 = {
+            body: [
+                [15, 19],
+                [16, 19],
+                [17, 19],
+                [18, 19],
+                [19, 19],
+            ],
+            controller: {
+                up: "ArrowUp",
+                down: "ArrowDown",
+                right: "ArrowRight",
+                left: "ArrowLeft"
+            },
+            direction: [-1, 0],
+            headColor: "red",
+            bodyColor: "black"
+        };
+        var snakes = [snake1, snake2];
+        return snakes.slice(0, num);
     }
     /** 生成食物 */
     function createFood() {
-        // 食物可以存放的空位有(400-snake.lenght)个，随机选择一个 0 - (400-snake.length) 的数字，并在地图上找到对应的空位
-        var randomFood = Math.floor(Math.random() * (400 - sanke.length));
+        // 食物可以存放的空位有(400-occupied)个，随机选择一个 0 - (400-occupied) 的数字，并在地图上找到对应的空位
+        var occupied = snakes.reduce(function (sum, item) { return (sum += item.body.length); }, 0);
+        var foodIndex = Math.floor(Math.random() * (400 - occupied));
         var food = [0, 0];
-        // 遍历地图
         for (var y = 0; y < 20; y++) {
             for (var x = 0; x < 20; x++) {
-                // 遍历蛇的身体，判断当前位置是否被蛇占据
-                var hasSnake = false;
-                for (var i = 0; i < sanke.length; i++) {
-                    var sx = sanke[i][0];
-                    var sy = sanke[i][1];
-                    if (sx === x && sy === y) {
-                        hasSnake = true;
+                var isOccupied = false;
+                for (var i = 0; i < snakes.length; i++) {
+                    if (isSnakeThere([x, y], snakes[i])) {
+                        isOccupied = true;
                     }
                 }
-                // 若未被占据则 randomFood - 1
-                if (!hasSnake) {
-                    randomFood--;
+                if (!isOccupied) {
+                    foodIndex--;
                 }
-                // 当 randomFood 为零时表示找到了食物的位置
-                if (randomFood === 0) {
-                    food[0] = x;
-                    food[1] = y;
-                }
-            }
-        }
-        for (var y = 0; y < 20; y++) {
-            for (var x = 0; x < 20; x++) {
-                // 遍历蛇的身体，判断当前位置是否被蛇占据
-                var hasSnake = false;
-                for (var i = 0; i < sanke2.length; i++) {
-                    var sx = sanke2[i][0];
-                    var sy = sanke2[i][1];
-                    if (sx === x && sy === y) {
-                        hasSnake = true;
-                    }
-                }
-                // 若未被占据则 randomFood - 1
-                if (!hasSnake) {
-                    randomFood--;
-                }
-                // 当 randomFood 为零时表示找到了食物的位置
-                if (randomFood === 0) {
-                    food[0] = x;
-                    food[1] = y;
-                }
-            }
-        }
-        for (var y = 0; y < 20; y++) {
-            for (var x = 0; x < 20; x++) {
-                // 遍历蛇的身体，判断当前位置是否被蛇占据
-                var hasSnake = false;
-                for (var i = 0; i < sanke.length; i++) {
-                    var sx = sanke[i][0];
-                    var sy = sanke[i][1];
-                    if (sx === x && sy === y) {
-                        hasSnake = true;
-                    }
-                }
-                // 若未被占据则 randomFood - 1
-                if (!hasSnake) {
-                    randomFood--;
-                }
-                // 当 randomFood 为零时表示找到了食物的位置
-                if (randomFood === 0) {
-                    food[0] = x;
-                    food[1] = y;
-                }
-            }
-        }
-        for (var y = 0; y < 20; y++) {
-            for (var x = 0; x < 20; x++) {
-                // 遍历蛇的身体，判断当前位置是否被蛇占据
-                var hasSnake = false;
-                for (var i = 0; i < sanke.length; i++) {
-                    var sx = sanke[i][0];
-                    var sy = sanke[i][1];
-                    if (sx === x && sy === y) {
-                        hasSnake = true;
-                    }
-                }
-                // 若未被占据则 randomFood - 1
-                if (!hasSnake) {
-                    randomFood--;
-                }
-                // 当 randomFood 为零时表示找到了食物的位置
-                if (randomFood === 0) {
+                if (foodIndex === 0) {
                     food[0] = x;
                     food[1] = y;
                 }
@@ -156,196 +115,99 @@
         map[fy][fx].style.backgroundColor = "pink";
     }
     /** 绘制蛇身体 */
-    function renderSnake() {
-        var _a = sanke[0], x = _a[0], y = _a[1];
-        map[y][x].style.backgroundColor = "green";
-        for (var i = 1; i < sanke.length; i++) {
-            var _b = sanke[i], x_1 = _b[0], y_1 = _b[1];
-            map[y_1][x_1].style.backgroundColor = "black";
-        }
-    }
-    function renderSnake2() {
-        var _a = sanke2[0], x = _a[0], y = _a[1];
-        map[y][x].style.backgroundColor = "red";
-        for (var i = 1; i < sanke2.length; i++) {
-            var _b = sanke2[i], x_2 = _b[0], y_2 = _b[1];
-            map[y_2][x_2].style.backgroundColor = "skyblue";
+    function renderSnake(snake) {
+        var _a = snake.body[0], x = _a[0], y = _a[1];
+        map[y][x].style.backgroundColor = snake.headColor;
+        for (var i = 1; i < snake.body.length; i++) {
+            var _b = snake.body[i], x_1 = _b[0], y_1 = _b[1];
+            map[y_1][x_1].style.backgroundColor = snake.bodyColor;
         }
     }
     /** 移动蛇 */
-    function moveSnake() {
+    function moveSnake(snake) {
         // 将蛇朝着 direction 的方向移动：将尾巴取出来，并将坐标设置为蛇头下一步的位置，并放到数组的首位，即蛇头的位置
-        var last = sanke.pop();
-        var first = sanke[0];
-        last[0] = first[0] - direction[0];
-        last[1] = first[1] - direction[1];
-        sanke.unshift(last);
-    }
-    function moveSnake2() {
-        // 将蛇朝着 direction 的方向移动：将尾巴取出来，并将坐标设置为蛇头下一步的位置，并放到数组的首位，即蛇头的位置
-        var last = sanke2.pop();
-        var first = sanke2[0];
-        last[0] = first[0] + direction2[0];
-        last[1] = first[1] + direction2[1];
-        sanke2.unshift(last);
+        var last = snake.body.pop();
+        var first = snake.body[0];
+        last[0] = first[0] + snake.direction[0];
+        last[1] = first[1] + snake.direction[1];
+        snake.body.unshift(last);
     }
     /** 判断是否吃食物 如果吃到食物则蛇的身体长度+1 并重新生成食物 */
-    function eatFoodWhenCounter() {
-        var first = sanke[0];
-        var last = sanke[sanke.length - 1];
+    function eatFoodWhenCounter(snake) {
+        var first = snake.body[0];
+        var last = snake.body[snake.body.length - 1];
         if (first[0] === food[0] && first[1] === food[1]) {
             // 复制蛇的尾巴坐标作为新增的身体
             var added = [last[0], last[1]];
-            sanke.push(added);
-            food = createFood();
-        }
-    }
-    function eatFoodWhenCounter2() {
-        var first = sanke2[0];
-        var last = sanke2[sanke2.length - 1];
-        if (first[0] === food[0] && first[1] === food[1]) {
-            // 复制蛇的尾巴坐标作为新增的身体
-            var added = [last[0], last[1]];
-            sanke2.push(added);
+            snake.body.push(added);
             food = createFood();
         }
     }
     /** 判断蛇头是否吃到蛇身 吃到则游戏结束 */
-    function dieWhenEatSelf() {
-        var xt = sanke[0][0];
-        var yt = sanke[0][1];
-        for (var a = 1; a < sanke.length; a++) {
-            var sx = sanke[a][0];
-            var xy = sanke[a][1];
-            if (xt === sx && yt === xy) {
-                gameOver();
-            }
-        }
-    }
-    function dieWhenEatSelf2() {
-        var xt = sanke2[0][0];
-        var yt = sanke2[0][1];
-        for (var a = 1; a < sanke2.length; a++) {
-            var sx = sanke2[a][0];
-            var xy = sanke2[a][1];
-            if (xt === sx && yt === xy) {
+    function dieWhenEatSelf(snake) {
+        var hx = snake.body[0][0];
+        var hy = snake.body[0][1];
+        for (var a = 1; a < snake.body.length; a++) {
+            var bx = snake.body[a][0];
+            var by = snake.body[a][1];
+            if (hx === bx && hy === by) {
                 gameOver();
             }
         }
     }
     function dieWhenEatEachOther() {
-        var xt = sanke[0][0];
-        var yt = sanke[0][1];
-        for (var a = 1; a < sanke2.length; a++) {
-            var sx = sanke2[a][0];
-            var xy = sanke2[a][1];
-            if (xt === sx && yt === xy) {
-                gameOver();
-            }
-            if (xt === sanke2[0][0] && yt === sanke2[0][1]) {
-                gameOver();
-            }
-        }
-    }
-    function dieWhenEatEachOther2() {
-        var xt = sanke2[0][0];
-        var yt = sanke2[0][1];
-        for (var a = 1; a < sanke.length; a++) {
-            var sx = sanke[a][0];
-            var xy = sanke[a][1];
-            if (xt === sx && yt === xy) {
-                gameOver();
-            }
-            if (xt === sanke[0][0] && yt === sanke[0][1]) {
-                gameOver();
+        for (var i = 0; i < snakes.length; i++) {
+            var snake = snakes[i];
+            var _a = snake.body[0], hx = _a[0], hy = _a[1];
+            for (var j = 0; j < snakes.length; j++) {
+                if (i === j)
+                    continue;
+                var otherSnake = snakes[j];
+                for (var k = 0; k < otherSnake.body.length; k++) {
+                    var _b = otherSnake.body[k], bx = _b[0], by = _b[1];
+                    if (hx === bx && hy === by) {
+                        gameOver();
+                    }
+                }
             }
         }
     }
-    /** 判断蛇头是否出界 出界则游戏结束 */
-    // function dieWhenOut() {
-    //   const first = sanke[0];
-    //   if (
-    //     first[0] === 20 ||
-    //     first[0] === -1 ||
-    //     first[1] === 20 ||
-    //     first[1] === -1
-    //   ) {
-    //     gameOver();
-    //   }
-    // }
     /** 穿墙 蛇头出界则在另一端再次出现 */
-    function throughWalls() {
-        var tx = sanke[0][0];
-        var ty = sanke[0][1];
+    function throughWalls(sanke) {
+        var tx = sanke.body[0][0];
+        var ty = sanke.body[0][1];
         if (tx === 20) {
-            sanke[0][0] = 0;
+            sanke.body[0][0] = 0;
         }
         if (tx === -1) {
-            sanke[0][0] = 19;
+            sanke.body[0][0] = 19;
         }
         if (ty === 20) {
-            sanke[0][1] = 0;
+            sanke.body[0][1] = 0;
         }
         if (ty === -1) {
-            sanke[0][1] = 19;
-        }
-    }
-    function throughWalls2() {
-        var tx = sanke2[0][0];
-        var ty = sanke2[0][1];
-        if (tx === 20) {
-            sanke2[0][0] = 0;
-        }
-        if (tx === -1) {
-            sanke2[0][0] = 19;
-        }
-        if (ty === 20) {
-            sanke2[0][1] = 0;
-        }
-        if (ty === -1) {
-            sanke2[0][1] = 19;
+            sanke.body[0][1] = 19;
         }
     }
     /** 监听键盘的事件 控制蛇头的方向并且不能反方向走 */
-    function control() {
+    function control(snake) {
         window.addEventListener("keydown", function (event) {
-            console.log(event.code);
-            if (event.code === "KeyD" && direction[0] !== 1) {
+            var controller = snake.controller, direction = snake.direction;
+            if (event.code === controller.left && direction[0] !== 1) {
                 direction[0] = -1;
                 direction[1] = 0;
             }
-            if (event.code === "KeyA" && direction[0] !== -1) {
+            if (event.code === controller.right && direction[0] !== -1) {
                 direction[0] = 1;
                 direction[1] = 0;
             }
-            if (event.code === "KeyW" && direction[1] !== -1) {
+            if (event.code === controller.down && direction[1] !== -1) {
                 direction[0] = 0;
                 direction[1] = 1;
             }
-            if (event.code === "KeyS" && direction[1] !== 1) {
+            if (event.code === controller.up && direction[1] !== 1) {
                 direction[0] = 0;
                 direction[1] = -1;
-            }
-        });
-    }
-    function control2() {
-        window.addEventListener("keydown", function (event) {
-            console.log(event.code);
-            if (event.code === "ArrowRight" && direction2[0] !== -1) {
-                direction2[0] = 1;
-                direction2[1] = 0;
-            }
-            if (event.code === "ArrowLeft" && direction2[0] !== 1) {
-                direction2[0] = -1;
-                direction2[1] = 0;
-            }
-            if (event.code === "ArrowUp" && direction2[1] !== 1) {
-                direction2[0] = 0;
-                direction2[1] = -1;
-            }
-            if (event.code === "ArrowDown" && direction2[1] !== -1) {
-                direction2[0] = 0;
-                direction2[1] = 1;
             }
         });
     }
@@ -355,32 +217,22 @@
         window.location.reload();
     }
     var map = createMap();
-    var sanke = createSnake();
-    var sanke2 = createSnake2();
-    var direction = [1, 0];
-    var direction2 = [1, 0];
+    var snakes = createSnakes(2);
+    snakes.forEach(function (snake) { return control(snake); });
     var food = createFood();
-    control();
-    control2();
     renderMap();
-    renderSnake();
-    renderSnake2();
     renderFood();
+    snakes.forEach(function (snake) { return renderSnake(snake); });
     setInterval(function () {
-        moveSnake();
-        moveSnake2();
-        eatFoodWhenCounter();
-        eatFoodWhenCounter2();
-        dieWhenEatSelf();
-        dieWhenEatSelf2();
-        // dieWhenOut();
+        snakes.forEach(function (snake) {
+            moveSnake(snake);
+            eatFoodWhenCounter(snake);
+            dieWhenEatSelf(snake);
+            throughWalls(snake);
+        });
         dieWhenEatEachOther();
-        dieWhenEatEachOther2();
-        throughWalls();
-        throughWalls2();
         renderMap();
         renderFood();
-        renderSnake();
-        renderSnake2();
-    }, 200);
+        snakes.forEach(function (snake) { return renderSnake(snake); });
+    }, 300);
 })();
